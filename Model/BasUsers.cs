@@ -23,6 +23,14 @@ namespace Model
         /// 地址
         /// </summary>
         public string Address { get; set; }
+        /// <summary>
+        /// 邮箱地址
+        /// </summary>
+        public string Email { get; set; }
+        /// <summary>
+        /// 手机号码
+        /// </summary>
+        public string Phone { get; set; }
 
     }
 }
