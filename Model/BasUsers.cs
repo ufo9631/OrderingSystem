@@ -19,6 +19,10 @@ namespace Model
         /// 密码
         /// </summary>
         public string PassWord { get; set; }
+        /// <summary>
+        /// 地址
+        /// </summary>
+        public string Address { get; set; }
 
     }
 }
