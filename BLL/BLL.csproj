@@ -40,7 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasChainBLL.cs" />
     <Compile Include="BaseBLL.cs" />
+    <Compile Include="BasProductBLL.cs" />
+    <Compile Include="BasRentBLL.cs" />
+    <Compile Include="BasUsersBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

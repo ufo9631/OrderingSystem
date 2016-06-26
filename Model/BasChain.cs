@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace Model
     /// <summary>
     /// 联锁表
     /// </summary>
+    [Table("BasChain")]
    public class BasChain:BaseModel
     {
         /// <summary>

@@ -49,7 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasChainDAL.cs" />
     <Compile Include="BaseDAL.cs" />
+    <Compile Include="BasProductDAL.cs" />
+    <Compile Include="BasRentDAL.cs" />
+    <Compile Include="BasUsersDAL.cs" />
     <Compile Include="DbEntities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

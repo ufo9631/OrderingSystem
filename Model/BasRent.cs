@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,8 @@ namespace Model
     /// <summary>
     /// 租户表
     /// </summary>
-   public class BasRent:BaseModel
+    [Table("BasRent")]
+    public class BasRent:BaseModel
     {
         /// <summary>
         /// 租户名称

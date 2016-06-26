@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,8 @@ namespace Model
     /// <summary>
     /// 产品表
     /// </summary>
-   public class BasProduct:BaseModel
+    [Table("BasProduct")]
+    public class BasProduct:BaseModel
     {
         /// <summary>
         /// 产品名称

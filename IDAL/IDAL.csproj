@@ -40,7 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IBasChainDAL.cs" />
     <Compile Include="IBaseDAL.cs" />
+    <Compile Include="IBasProductDAL.cs" />
+    <Compile Include="IBasRentDAL.cs" />
+    <Compile Include="IBasUsersDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
