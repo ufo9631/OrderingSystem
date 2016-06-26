@@ -598,6 +598,7 @@
     <Content Include="Areas\Admin\Views\Shared\_AdminLayoutPage.cshtml" />
     <Content Include="Areas\Admin\Content\tree_data.json" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Config\Log4net.config" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
