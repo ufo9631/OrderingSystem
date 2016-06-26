@@ -186,6 +186,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductManageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SupplierManageController.cs" />
+    <Compile Include="Areas\Admin\Models\AdminBaseController.cs" />
     <Compile Include="Areas\MemberCenter\MemberCenterAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -599,6 +602,7 @@
     <Content Include="Areas\Admin\Content\tree_data.json" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Config\Log4net.config" />
+    <Content Include="Areas\Admin\Views\SupplierManage\Index.cshtml" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1358,6 +1362,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\lib\datapattern.js" />
     <Content Include="Scripts\locale\easyui-lang-af.js" />
     <Content Include="Scripts\locale\easyui-lang-am.js" />
     <Content Include="Scripts\locale\easyui-lang-ar.js" />
@@ -1424,7 +1429,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\ProductManage\" />
     <Folder Include="Areas\MemberCenter\Controllers\" />
     <Folder Include="Areas\MemberCenter\Models\" />
     <Folder Include="Areas\MemberCenter\Views\Shared\" />

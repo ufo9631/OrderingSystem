@@ -1,0 +1,187 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutPage.cshtml";
+}
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            InitGrid();
+            $("#dlg").dialog({
+                title: "添加供应商",
+                iconCls: "icon-edit",
+                collapsible: true,
+                minimizable: false,
+                maximizable: false,
+                resizable: true,
+                width: 800,
+                height: 500,
+                modal: true,
+                // href: "Content.aspx",
+                buttons: [{
+                    text: '添加',
+                    iconCls: 'icon-add',
+                    handler: function () {
+                        var isValid = $("#fm").form("validate");
+                        if (isValid) {
+                            var data = $("#fm").serialize();
+                            $.post("/Admin/SupplierManage/AddData", data, function () {
+
+                            });
+                        } else {
+                            $.messager.alert("提示", "请填写所有的必填项", "info");
+                        }
+                    }
+                }, {
+                    text: '取消',
+                    iconCls: 'icon-cancel',
+                    handler: function () {
+                        $('#dlg').dialog('close');
+                    }
+                }]
+            });
+        });
+        //实现对DataGird控件的绑定操作
+        function InitGrid(queryData) {
+            $('#grid').datagrid({   //定位到Table标签，Table标签的ID是grid
+                url: '/Admin/SupplierManage/GetDataList',   //指向后台的Action来获取当前用户的信息的Json格式的数据
+                title: '供应商管理',
+                //下面的这些属性如果谁不太清楚的话我建议去官方网站去学习
+                iconCls: 'icon-view',
+                //height: 'auto',
+                width: 'auto',
+                nowrap: true,
+                //fit: true, //这个不注释掉会导致数据出不来，原因有空再查
+                scrollbarSize: 0,
+                autoRowHeight: false,
+                striped: true,
+                collapsible: true,
+                fitColumns: false,
+                pagination: true,
+                rownumbers: true,
+                sortName: 'ID',    //根据某个字段给easyUI排序
+                sortOrder: 'asc',
+                remoteSort: false,
+                idField: 'ID',
+                loadMsg: "正在加载",
+                pageList: [5, 10, 15, 20],
+                pageSize: 10,
+                queryParams: queryData,  //异步查询的参数
+                columns: [[
+                    { field: 'ck', checkbox: true },   //选择
+                    { title: 'ID', field: 'Id', width: 40, sortable: true },  //主键
+                     { title: '供应商名称', field: 'SupplierName', width: 280, sortable: true },
+                     { title: '供应商电话', field: 'Mobile', width: 200, sortable: true },
+                     { title: '邮箱', field: 'Email', width: 200, sortable: true },
+                     {
+                         title: '创建日期', field: 'CreateTime', width: 200, sortable: true, formatter: function (value, row, index) {//Json格式时间转化为正常格式
+                             return (eval(value.replace(/\/Date\((\d+)\)\//gi, "new Date($1)"))).pattern("yyyy-MM-dd");
+                         }
+                     },
+                    { title: '地址', field: 'Address', width: 800, sortable: true }
+                ]],
+                toolbar: [{
+                    id: 'btnAdd',
+                    text: '添加',
+                    iconCls: 'icon-add',
+                    handler: function () {
+                        ShowAddDialog();//实现添加记录的页面
+                    }
+                }, '-', {
+                    id: 'btnEdit',
+                    text: '修改',
+                    iconCls: 'icon-edit',
+                    handler: function () {
+                        //    ShowEditOrViewDialog();//实现修改记录的方法
+                    }
+                }, '-', {
+                    id: 'btnDelete',
+                    text: '删除',
+                    iconCls: 'icon-remove',
+                    handler: function () {
+                        //  Delete();//实现直接删除数据的方法
+                    }
+                }, '-', {
+                    id: 'btnView',
+                    text: '查看',
+                    iconCls: 'icon-table',
+                    handler: function () {
+                        //    ShowEditOrViewDialog("view");//实现查看记录详细信息的方法
+                    }
+                }, '-', {
+                    id: 'btnReload',
+                    text: '刷新',
+                    iconCls: 'icon-reload',
+                    handler: function () {
+                        //实现刷新栏目中的数据
+                        $("#grid").datagrid("reload");
+                    }
+                }]
+            });
+
+            $('#grid').datagrid({
+                onDblClickRow: function (rowIndex, rowData) {
+                    $('#grid').datagrid('uncheckAll');
+                    $('#grid').datagrid('checkRow', rowIndex);
+                    ShowEditOrViewDialog();
+                }
+            });
+        }
+        ///弹出添加的文本框
+        function ShowAddDialog() {
+            $('#dlg').dialog('open').dialog('setTitle', '新增产品');
+
+            $('#fm').form('clear');
+        }
+
+    </script>
+}
+<style type="text/css">
+    #tbList {
+        border: 2px solid #90CBFB;
+        margin: 20px auto;
+        border-collapse: collapse;
+    }
+
+        #tbList td {
+            border: 1px solid #90CBFB;
+            padding: 5px;
+            text-align: left;
+        }
+</style>
+<table id="grid" style="width: 1024px; height:800px " title="用户操作" iconcls="icon-view"></table>
+
+
+<div id="dlg" class="easyui-dialog" style="width: 550px; height: 480px; padding: 10px 20px"
+     closed="true" buttons="#dlg-buttons" modal="true">
+    <form id="fm" method="post" novalidate>
+        <input type="hidden" id="txtId" />
+        <table id="tbList">
+            <tr>
+                <td><label><font color="red">*</font>供应商名称 &nbsp;:</label></td>
+                <td><input id="txtSupplierName" name="SupplierName" class="easyui-validatebox" required="true" /></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td><label><font color="red">*</font>供应商电话 &nbsp;:</label></td>
+                <td><input id="txtMobile" name="Mobile" class="easyui-validatebox" required="true" /></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><label>邮箱:</label></td>
+                <td><input id="txtEmail" name="Email" class="easyui-validatebox" required="false"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><label>供应商地址:</label></td>
+                <td><input type="text" id="txtAddress" name="Address" /> </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><label>备注:</label></td>
+                <td colspan="2"><textarea id="txtRemark" name="Remark" style="width:487px; height:195px"> </textarea></td>
+            </tr>
+        </table>
+    </form>
+</div>

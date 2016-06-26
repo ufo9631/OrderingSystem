@@ -9,7 +9,7 @@ namespace IBLL
     public interface IBaseBLL<T> where T : class, new()
     {
 
-        IQueryable<T> GetEntityList(System.Linq.Expressions.Expression<Func<T, bool>> whereLamobda);
+        IQueryable<T> GetEntityList(System.Linq.Expressions.Expression<Func<T, bool>> whereLamobda, out int total);
         IQueryable<T> GetEntityListPage<s>(int pageIndex, int pageSize, System.Linq.Expressions.Expression<Func<T, bool>> whereLamobda, System.Linq.Expressions.Expression<Func<T, s>> orderbyLamobda, bool isAsc, out int reCount);
         bool AddEntity(T entity);
 

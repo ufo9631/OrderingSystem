@@ -1,6 +1,7 @@
 ﻿using IDAL;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,9 +18,21 @@ namespace DAL
             dbContext = new DbEntities();
             dbContext.Database.Initialize(true);
         }
-        public IQueryable<T> GetEntityList(System.Linq.Expressions.Expression<Func<T, bool>> whereLamobda)
+        public IQueryable<T> GetEntityList(System.Linq.Expressions.Expression<Func<T, bool>> whereLamobda, out int total)
         {
-            return dbContext.Set<T>().Where(whereLamobda);
+            if (whereLamobda != null)
+            {
+                var data = dbContext.Set<T>().Where(whereLamobda);
+                total = data.Count();
+                return data;
+            }
+            else
+            {
+                var data = dbContext.Set<T>().AsQueryable();
+                total = data.Count();
+                return data;
+            }
+
         }
         public IQueryable<T> GetEntityListPage<S>(int pageIndex, int pageSize, System.Linq.Expressions.Expression<Func<T, bool>> whereLamobda, System.Linq.Expressions.Expression<Func<T, S>> orderbyLamobda, bool isAsc, out int reCount)
         {

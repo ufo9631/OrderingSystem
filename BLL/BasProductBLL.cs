@@ -5,9 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IDAL;
+using IBLL;
+
 namespace BLL
 {
-    public class BasProductBLL : BaseBLL<BasProduct>
+    public class BasProductBLL : BaseBLL<BasProduct>, IBasProductBLL
     {
         public readonly IBasProductDAL BasProductDAL;
         public BasProductBLL(IBasProductDAL _BasProductDAL)

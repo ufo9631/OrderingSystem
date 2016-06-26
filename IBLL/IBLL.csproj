@@ -45,6 +45,7 @@
     <Compile Include="IBasProductBLL.cs" />
     <Compile Include="IBasRentBLL.cs" />
     <Compile Include="IBasUsersBLL.cs" />
+    <Compile Include="ISupplierBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -43,7 +43,7 @@
     ]
   },
   {
-    "id":3,
+    "id": 3,
     "text": "产品管理",
     "iconCls": "icon-large-smartart",
     "children": [
@@ -56,6 +56,22 @@
         "url": "System/Test2"
       }
     ]
+  },
+  {
+    "id": 4,
+    "text": "供应商管理",
+    "iconCls": "icon-large-shapes",
+    "children": [
+      {
+        "text": "供应商列表",
+        "url": "/Admin/SupplierManage/Index"
+      },
+      {
+        "text": "Test",
+        "url": "System/Test2"
+      }
+    ]
   }
+
 
 ]

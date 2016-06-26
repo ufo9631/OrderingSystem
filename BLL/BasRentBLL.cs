@@ -5,9 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IDAL;
+using IBLL;
+
 namespace BLL
 {
-    public class BasRentBLL : BaseBLL<BasRent>
+    public class BasRentBLL : BaseBLL<BasRent>, IBasRentBLL
     {
         public readonly IBasRentDAL BasRentDAL;
         public BasRentBLL(IBasRentDAL _BasRentDAL)

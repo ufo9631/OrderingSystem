@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using IDAL;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-  public  class BasProductDAL:BaseDAL<BasProduct>
+  public  class BasProductDAL:BaseDAL<BasProduct>, IBasProductDAL
     {
     }
 }

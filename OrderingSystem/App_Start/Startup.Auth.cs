@@ -5,9 +5,9 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using TestProject.Models;
+using OrderingSystem.Models;
 
-namespace TestProject
+namespace OrderingSystem
 {
     public partial class Startup
     {

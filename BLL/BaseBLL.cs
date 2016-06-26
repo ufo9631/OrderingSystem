@@ -11,9 +11,11 @@ namespace BLL
         public IDAL.IBaseDAL<T> DalInstance;
 
         public abstract void Initialize();
-        public IQueryable<T> GetEntityList(System.Linq.Expressions.Expression<Func<T, bool>> whereLamobda)
+        public IQueryable<T> GetEntityList(System.Linq.Expressions.Expression<Func<T, bool>> whereLamobda, out int total)
         {
-            return DalInstance.GetEntityList(whereLamobda);
+            var data = DalInstance.GetEntityList(whereLamobda, out total);
+            total = data.Count();
+            return data;
         }
 
         public IQueryable<T> GetEntityListPage<s>(int pageIndex, int pageSize, System.Linq.Expressions.Expression<Func<T, bool>> whereLamobda, System.Linq.Expressions.Expression<Func<T, s>> orderbyLamobda, bool isAsc, out int reCount)

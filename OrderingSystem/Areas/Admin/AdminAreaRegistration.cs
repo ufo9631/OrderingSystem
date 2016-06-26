@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace TestProject.Areas.Admin
+namespace OrderingSystem.Areas.Admin
 {
     public class AdminAreaRegistration : AreaRegistration 
     {
@@ -15,7 +15,7 @@ namespace TestProject.Areas.Admin
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
-                "Admin_default",
+                "Admin_Route",
                 "Admin/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );

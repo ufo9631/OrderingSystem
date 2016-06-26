@@ -46,6 +46,7 @@
     <Compile Include="BasRentBLL.cs" />
     <Compile Include="BasUsersBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SupplierBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IBLL\IBLL.csproj">

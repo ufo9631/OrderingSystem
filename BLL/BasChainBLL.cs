@@ -5,9 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IDAL;
+using IBLL;
+
 namespace BLL
 {
-    public class BasChainBLL : BaseBLL<BasChain>
+    public class BasChainBLL : BaseBLL<BasChain>, IBasChainBLL
     {
         public readonly IBasChainDAL BasChainDAL;
         public BasChainBLL(IBasChainDAL _BasChainDAL)

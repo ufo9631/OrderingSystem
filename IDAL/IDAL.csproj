@@ -45,6 +45,7 @@
     <Compile Include="IBasProductDAL.cs" />
     <Compile Include="IBasRentDAL.cs" />
     <Compile Include="IBasUsersDAL.cs" />
+    <Compile Include="ISupplierDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,9 +6,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using TestProject.Models;
+using OrderingSystem.Models;
 
-namespace TestProject.Controllers
+namespace OrderingSystem.Controllers
 {
     [Authorize]
     public class ManageController : Controller

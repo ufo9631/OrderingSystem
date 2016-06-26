@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace TestProject.Areas.MemberCenter
+namespace OrderingSystem.Areas.MemberCenter
 {
     public class MemberCenterAreaRegistration : AreaRegistration 
     {
@@ -15,7 +15,7 @@ namespace TestProject.Areas.MemberCenter
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
-                "MemberCenter_default",
+                "MemberCenter_Route",
                 "MemberCenter/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );

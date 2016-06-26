@@ -1,5 +1,6 @@
 ﻿using DAL;
 using log4net.Config;
+using OrderingSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,7 +11,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace TestProject
+namespace OrderingSystem
 {
     public class MvcApplication : System.Web.HttpApplication
     {
@@ -20,6 +21,7 @@ namespace TestProject
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            ApplicationStart.Dependency();
             LoadLog4netConfig();
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<DbEntities>());
         }

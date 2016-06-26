@@ -5,9 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IDAL;
+using IBLL;
+
 namespace BLL
 {
-    public class BasUsersBLL : BaseBLL<BasUsers>
+    public class BasUsersBLL : BaseBLL<BasUsers>, IBasUsersBLL
     {
         public readonly IBasUsersDAL BasUsersDAL;
         public BasUsersBLL(IBasUsersDAL _BasUsersDAL)
