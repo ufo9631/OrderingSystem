@@ -19,15 +19,32 @@
                 modal: true,
                 // href: "Content.aspx",
                 buttons: [{
-                    text: '添加',
+                    text: '确定',
                     iconCls: 'icon-add',
                     handler: function () {
                         var isValid = $("#fm").form("validate");
                         if (isValid) {
+                            var id = $("#txtId").val();
                             var data = $("#fm").serialize();
-                            $.post("/Admin/SupplierManage/AddData", data, function () {
+                            if (id == "" || id <= 0) {
+                                $.post("/Admin/SupplierManage/AddData", data, function () {
+                                    $.messager.alert("提示", "添加成功", "info", function () {
+                                        dialogClose();
+                                        $("#grid").datagrid("reload");
+                                    });
+                                });
+                            } else {
+                                data += "&Id=" + id;
+                                $.post("/Admin/SupplierManage/EditData", data, function () {
+                                    $.messager.alert("提示", "修改信息成功", "info", function () {
+                                        dialogClose();
+                                        $("#grid").datagrid("unselectAll");
+                                        $("#grid").datagrid("reload");
+                                    });
+                                });
+                            }
 
-                            });
+
                         } else {
                             $.messager.alert("提示", "请填写所有的必填项", "info");
                         }
@@ -36,16 +53,19 @@
                     text: '取消',
                     iconCls: 'icon-cancel',
                     handler: function () {
-                        $('#dlg').dialog('close');
+                        dialogClose();
+
                     }
                 }]
             });
         });
+
+
         //实现对DataGird控件的绑定操作
         function InitGrid(queryData) {
             $('#grid').datagrid({   //定位到Table标签，Table标签的ID是grid
                 url: '/Admin/SupplierManage/GetDataList',   //指向后台的Action来获取当前用户的信息的Json格式的数据
-                title: '供应商管理',
+                // title: '供应商管理',
                 //下面的这些属性如果谁不太清楚的话我建议去官方网站去学习
                 iconCls: 'icon-view',
                 //height: 'auto',
@@ -59,23 +79,24 @@
                 fitColumns: false,
                 pagination: true,
                 rownumbers: true,
-                sortName: 'ID',    //根据某个字段给easyUI排序
-                sortOrder: 'asc',
+                singleSelect: true,//设置智能选一行
+                // sortName: 'Id',    //根据某个字段给easyUI排序
+                // sortOrder: 'asc',
                 remoteSort: false,
-                idField: 'ID',
+                idField: 'Id',
                 loadMsg: "正在加载",
                 pageList: [5, 10, 15, 20],
                 pageSize: 10,
                 queryParams: queryData,  //异步查询的参数
                 columns: [[
-                    { field: 'ck', checkbox: true },   //选择
-                    { title: 'ID', field: 'Id', width: 40, sortable: true },  //主键
+                    { field: 'ck', checkbox: true, hidden: true },   //选择
+                    { title: 'ID', field: 'Id', width: 40, sortable: true, hidden: true },  //主键
                      { title: '供应商名称', field: 'SupplierName', width: 280, sortable: true },
                      { title: '供应商电话', field: 'Mobile', width: 200, sortable: true },
                      { title: '邮箱', field: 'Email', width: 200, sortable: true },
                      {
                          title: '创建日期', field: 'CreateTime', width: 200, sortable: true, formatter: function (value, row, index) {//Json格式时间转化为正常格式
-                             return (eval(value.replace(/\/Date\((\d+)\)\//gi, "new Date($1)"))).pattern("yyyy-MM-dd");
+                             return (eval(value.replace(/\/Date\((\d+)\)\//gi, "new Date($1)"))).pattern("yyyy-MM-dd hh:mm:ss");
                          }
                      },
                     { title: '地址', field: 'Address', width: 800, sortable: true }
@@ -92,13 +113,29 @@
                     text: '修改',
                     iconCls: 'icon-edit',
                     handler: function () {
-                        //    ShowEditOrViewDialog();//实现修改记录的方法
+                        ShowEditOrViewDialog();//实现修改记录的方法
                     }
                 }, '-', {
                     id: 'btnDelete',
                     text: '删除',
                     iconCls: 'icon-remove',
                     handler: function () {
+                        var rows = $('#grid').datagrid("getSelected");
+                        if (rows == null) {
+                            $.messager.alert("提示", "请选择要删除的项", "error");
+                            return false;
+                        } else {
+                            $.messager.confirm("提示", "确定要删除吗？", function (b) {
+                                if (b) {
+                                    $.post("/Admin/SupplierManage/DeleteData", { Id: rows.Id }, function () {
+                                        $.messager.alert("提示", "删除成功！", "msg", function () {
+                                            $("#grid").datagrid("reload");
+                                        });
+
+                                    });
+                                }
+                            });
+                        }
                         //  Delete();//实现直接删除数据的方法
                     }
                 }, '-', {
@@ -129,11 +166,29 @@
         }
         ///弹出添加的文本框
         function ShowAddDialog() {
-            $('#dlg').dialog('open').dialog('setTitle', '新增产品');
-
+            $('#dlg').dialog('open').dialog('setTitle', '添加供应商');
             $('#fm').form('clear');
         }
-
+        //实现修改记录的方法
+        function ShowEditOrViewDialog() {
+            var rows = $('#grid').datagrid("getSelected");
+            if (rows == null) {
+                $.messager.alert("提示", "请选择要编辑的项", "info");
+            } else {
+                $("#txtId").val(rows.Id);
+                $("#txtSupplierName").val(rows.SupplierName);
+                $("#txtMobile").val(rows.Mobile);
+                $("#txtEmail").val(rows.Email);
+                $("#txtAddress").val(rows.Address);
+                $("#txtRemark").val(rows.Remark);
+                $('#dlg').dialog('open').dialog('setTitle', '编辑供应商');
+            }
+        }
+        ///关闭弹出的框
+        function dialogClose() {
+            $("#txtId").val("");
+            $('#dlg').dialog('close');
+        }
     </script>
 }
 <style type="text/css">
